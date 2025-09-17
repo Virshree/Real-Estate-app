@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import rentals1 from "../assets/rentals1.jpg";
 import rentals2 from "../assets/rentals2.jpg";
 import rentals3 from "../assets/rentals3.jpg";
@@ -8,8 +8,14 @@ import client2 from "../assets/client2.jpg";
 import budget from "../assets/budget.png";
 import trust from "../assets/trust.png";
 import prime from "../assets/prime.png";
+import { GlobalContext } from "../context/context";
+import PropertyCard from "./PropertyCard";
 
 function Rentals() {
+  const {properties}=useContext(GlobalContext);
+
+  const filteredRentals=properties?.filter(item=>item?.AvailableForRent===true);
+  console.log(filteredRentals)
   return (
     <div className="ml-68  mr-65 mt-5 ">
       <div className=" flex md:flex-row md:items-center md:justify-between mb-8">
@@ -28,88 +34,16 @@ function Rentals() {
         </button>
       </div>
 
-      <div className="flex flex-wrap  ">
-        <div className="bg-[#F1F1F1] text-black  w-[325px] h-[380px] m-2 p-2 rounded-xl">
-          <img
-            src={rentals1}
-            alt="rentals"
-            className="w-[300px] h-[200px] object-cover  rounded-2xl"
-          />
-          <div className="flex flex-row gap-15 mt-2 p-2">
-            <p>New York,YN</p>
-            <p> ⭐ 4.5/5</p>
-          </div>
-          <p className="text-[#1E1E1E] w-[270px]">
-            Spacious 3BHK apartment in a prime location with modern amenities.
-          </p>
-          <div className="flex flex-row gap-15 mt-2 p-2">
-            <button className="bg-[#1E3A8A] text-white w-[128px] h-[38.7px] rounded-full">
-              Buy Now
-            </button>
-            <p>$1,500/month</p>
-          </div>
-        </div>
-        <div className="bg-[#F1F1F1] text-black  w-[325px] h-[380px] m-2 p-2 ">
-          <img
-            src={rentals2}
-            alt="rentals"
-            className="w-[300px] h-[200px] object-cover rounded-2xl "
-          />
-          <div className="flex flex-row gap-15 mt-2 p-2">
-            <p>New York,YN</p>
-            <p> ⭐ 4.5/5</p>
-          </div>
-          <p className="text-[#1E1E1E] w-[270px]">
-            Spacious 3BHK apartment in a prime location with modern amenities.
-          </p>
-          <div className="flex flex-row gap-15 mt-2 p-2">
-            <button className="bg-[#1E3A8A] text-white w-[128px] h-[38.7px] rounded-full">
-              Buy Now
-            </button>
-            <p>$2,599/month</p>
-          </div>
-        </div>
-        <div className="bg-[#F1F1F1] text-black  w-[325px] h-[380px] m-2 p-2  ">
-          <img
-            src={rentals3}
-            alt="rentals"
-            className="w-[320px] h-[200px] object-cover rounded-2xl"
-          />
-          <div className="flex flex-row gap-15 mt-2 p-2">
-            <p>New York,YN</p>
-            <p> ⭐ 4.5/5</p>
-          </div>
-
-          <p className="text-[#1E1E1E] w-[270px]">
-            Spacious 3BHK apartment in a prime location with modern amenities.
-          </p>
-          <div className="flex flex-row gap-15 mt-2 p-2">
-            <button className="bg-[#1E3A8A] text-white w-[128px] h-[38.7px] rounded-full">
-              Buy Now
-            </button>
-            <p>$1,600/month</p>
-          </div>
-        </div>
-        <div className="bg-[#F1F1F1] text-black  w-[335px] h-[380px] m-1 p-2  ">
-          <img
-            src={rentals4}
-            alt="rentals"
-            className="w-[320px] h-[200px] object-cover rounded-2xl"
-          />
-          <div className="flex flex-row gap-15 mt-2 p-2">
-            <p>New York,YN</p>
-            <p> ⭐ 4.5/5</p>
-          </div>
-          <p className="text-[#1E1E1E] w-[270px]">
-            Spacious 3BHK apartment in a prime location with modern amenities.
-          </p>
-          <div className="flex flex-row gap-15 mt-2 p-2">
-            <button className="bg-[#1E3A8A] text-white w-[128px] h-[38.7px] rounded-full">
-              Buy Now
-            </button>
-            <p>$450,000</p>
-          </div>
-        </div>
+      <div className="flex flex-wrap">
+       
+          {filteredRentals?.map((item)=>(
+           <PropertyCard key={item?.id} propertyImage={item?.propertyImage} city={item?.city} 
+           country={item?.country} description={item?.description} rating={item?.rating} price={item?.price}/>
+          ))}
+        
+       
+        
+       
 
         {/**Start your Journey Section */}
         <div className="ml-5 mt-10 ">
@@ -197,7 +131,7 @@ function Rentals() {
           </div>
         </div>
       </div>
-      <div></div>
+      
     </div>
   );
 }
