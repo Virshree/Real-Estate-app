@@ -1,0 +1,1 @@
+export const propertyUrl="https://68cab55a430c4476c34a9e8c.mockapi.io/properties/real-estate-rent-properties"
