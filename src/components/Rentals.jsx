@@ -1,8 +1,5 @@
-import React, { useContext } from "react";
-import rentals1 from "../assets/rentals1.jpg";
-import rentals2 from "../assets/rentals2.jpg";
-import rentals3 from "../assets/rentals3.jpg";
-import rentals4 from "../assets/rentals4.jpg";
+import React, { useContext, useState } from "react";
+
 import client1 from "../assets/client1.jpg";
 import client2 from "../assets/client2.jpg";
 import budget from "../assets/budget.png";
@@ -14,39 +11,47 @@ import PropertyCard from "./PropertyCard";
 function Rentals() {
   const {properties}=useContext(GlobalContext);
 
+  const[showAllRentals,setShowAllRentals]=useState(false);
+
   const filteredRentals=properties?.filter(item=>item?.AvailableForRent===true);
-  console.log(filteredRentals)
+  
+  const visibilePropertiesRentals=showAllRentals?filteredRentals:filteredRentals?.slice(0,4);
   return (
-    <div className="ml-68  mr-65 mt-5 ">
-      <div className=" flex md:flex-row md:items-center md:justify-between mb-8">
+    <div className="max-w-[1440px] mx-auto px-4">
+      {/* Header Section */}
+      <div className=" flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
+          {/* Left side (title + description) */}
         <div>
-          <h3 className="text-[#1E3A8A] font-bold text-[32px] md:text-[40px]">
+          <h3 className="text-[#1E3A8A] text-2xl mt-5 md:text-4xl leading-snugtext-[#1E3A8A] font-bold text-[32px] md:text-[40px]">
             Find The Perfect Rental Home
           </h3>
-          <p className="text-[#555555] text-[16px] md:text-[20px] font-normal max-w-2xl">
+          <p className="text-[#555555] text-base md:text-lg font-normal max-w-2xl mt-2">
             Browse our top-rated properties for sale, featuring premium listings
             tailored to your needs. Find your dream home today!
           </p>
         </div>
-
-        <button className="  md:mt-0 bg-[#1E3A8A] text-white px-8 py-3 rounded-full font-medium hover:bg-[#1A2F6D] transition">
-          View all Rentals
+  {/* Right side (button) */}
+        <button   onClick={()=>setShowAllRentals(!showAllRentals)}
+        className=" cursor-pointer bg-[#1E3A8A] text-white px-6 md:px-8 py-2.5 md:py-3 rounded-full font-medium hover:bg-[#1A2F6D] transition">
+{showAllRentals?"Show Less":"View More Rentals"}
         </button>
       </div>
 
-      <div className="flex flex-wrap">
+      <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-6">
        
-          {filteredRentals?.map((item)=>(
+          {visibilePropertiesRentals?.map((item)=>(
            <PropertyCard key={item?.id} propertyImage={item?.propertyImage} city={item?.city} 
            country={item?.country} description={item?.description} rating={item?.rating} price={item?.price}/>
           ))}
         
-       
+       </div>
         
        
 
-        {/**Start your Journey Section */}
-        <div className="ml-5 mt-10 ">
+           {/**Start your Journey Section */}
+           <section id="aboutus" className="h-screen">
+           <div className="ml-5 mt-10 ">
+        
           <h3 className="text-[#1E3A8A] font-bold text-[32px] md:text-[40px]">
             Start Your Journey Today!
           </h3>
@@ -71,67 +76,78 @@ function Rentals() {
           </div>
         </div>
 
-        {/**Latest Properties Section*/}
+ {/* Latest Properties Section */}
+<div className="flex flex-col lg:flex-row items-center gap-10 mt-10">
+  {/* Images */}
+  <div className="relative w-full lg:w-1/2 flex flex-col items-center">
+    {/* Main image */}
+    <img
+      src={client2}
+      alt="House 1"
+      className="w-full max-w-[500px] rounded-lg border-4 border-white shadow-lg"
+    />
 
-        <div class="relative flex  gap-57 mt-10  ">
-          <img
-            src={client2}
-            class="w-[510px] h-[513px] object-cover rounded-lg border-10 border-white"
-          />
-          <img
-            src={client1}
-            class="absolute top-45 left-65 w-[408px] h-[405px]  border-10 border-white shadow-lg"
-          />
-
-          <div className=" flex-wrap ">
-            <h4 className="w-[659px] text-center  text-[#1E3A8A] text-[40px] font-bold ">
-              We Provide Latest Properties For Our Valuable Clients
-            </h4>
-            <div className="flex flex-row mt-5 ml-15">
-              <img src={budget} alt="budget" className="w-15 h-15" />
-         
-              <div className="flex flex-col ml-6 ">
-                <h4 className="text-[#1E3A8A] font-semibold text-[28px] ">
-                  Budget Friendly
-                </h4>
-                <p className="text-[18px] w-[440px] h-[81px] text-black">
-                  Lorem ipsum dolor sit amet consectetur. Venenatis sed ac
-                  aenean tempus. Lectus quis pretium varius iaculis sed.
-                </p>
-              </div>
-              </div>
-              <div className="flex flex-row mt-4 ml-15">
-              <img src={trust} alt="budget" className="w-15 h-15" />
-        
-              <div className="flex flex-col ml-6 ">
-                <h4 className="text-[#1E3A8A] font-semibold text-[28px] ">
-                Trusted By Thausand
-                </h4>
-                <p className="text-[18px] w-[440px] h-[81px] text-black">
-                  Lorem ipsum dolor sit amet consectetur. Venenatis sed ac
-                  aenean tempus. Lec/tus quis pretium varius iaculis sed.
-                </p>
-              </div>
-              </div>
-
-              <div className="flex  flex-row mt-4 ml-15">
-              <img src={prime} alt="budget" className="w-15 h-15" />
-             
-              <div className="flex flex-col ml-6">
-                <h4 className="text-[#1E3A8A] font-semibold text-[28px] ">
-                Prime Location
-                </h4>
-                <p className="text-[18px] w-[440px] h-[81px] text-black">
-                  Lorem ipsum dolor sit amet consectetur. Venenatis sed ac
-                  aenean tempus. Lectus quis pretium varius iaculis sed.
-                </p>
-              </div>
-              </div>
-        
-          </div>
-        </div>
-      </div>
+    {/* Overlapping image (only overlaps on lg and above) */}
+    <img
+      src={client1}
+      alt="House 2"
+      className="w-full max-w-[400px] h-[405px]rounded-lg border-4 border-white shadow-lg mt-6
+      lg:absolute lg:top-65 lg:left-65 lg:mt-0"
       
+    />
+  </div>
+
+  {/* Text Content */}
+  <div className="flex flex-col gap-6 lg:w-1/2">
+    <h4 className="text-center lg:text-left text-[#1E3A8A] text-2xl sm:text-3xl md:text-4xl font-bold">
+      We Provide Latest Properties For Our Valuable Clients
+    </h4>
+
+    {/* Feature 1 */}
+    <div className="flex items-start gap-4">
+      <img src={budget} alt="budget" className="w-10 h-10 sm:w-12 sm:h-12" />
+      <div>
+        <h4 className="text-[#1E3A8A] font-semibold text-lg sm:text-xl md:text-2xl">
+          Budget Friendly
+        </h4>
+        <p className="text-sm sm:text-base md:text-lg text-black">
+          Lorem ipsum dolor sit amet consectetur. Venenatis sed ac aenean
+          tempus. Lectus quis pretium varius iaculis sed.
+        </p>
+      </div>
+    </div>
+
+    {/* Feature 2 */}
+    <div className="flex items-start gap-4">
+      <img src={trust} alt="trust" className="w-10 h-10 sm:w-12 sm:h-12" />
+      <div>
+        <h4 className="text-[#1E3A8A] font-semibold text-lg sm:text-xl md:text-2xl">
+          Trusted By Thousand
+        </h4>
+        <p className="text-sm sm:text-base md:text-lg text-black">
+          Lorem ipsum dolor sit amet consectetur. Venenatis sed ac aenean
+          tempus. Lectus quis pretium varius iaculis sed.
+        </p>
+      </div>
+    </div>
+
+    {/* Feature 3 */}
+    <div className="flex items-start gap-4">
+      <img src={prime} alt="prime" className="w-10 h-10 sm:w-12 sm:h-12" />
+      <div>
+        <h4 className="text-[#1E3A8A] font-semibold text-lg sm:text-xl md:text-2xl">
+          Prime Location
+        </h4>
+        <p className="text-sm sm:text-base md:text-lg text-black">
+          Lorem ipsum dolor sit amet consectetur. Venenatis sed ac aenean
+          tempus. Lectus quis pretium varius iaculis sed.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+         </section> 
     </div>
   );
 }

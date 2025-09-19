@@ -1,6 +1,6 @@
-import budgeticon from "../assets/budgeticon.jpg"
-import keyicon from '../assets/keyicon.jpg';
-import aisearchicon from '../assets/aisearchicon.jpg';
+import budgeticon from "../assets/budgetIcons.png"
+import keyicon from '../assets/keyIcons.png';
+import aisearchicon from '../assets/aiSearchIcons.png';
 import lockicon from '../assets/lockicon.png';
 
 export const heroCardData=[{

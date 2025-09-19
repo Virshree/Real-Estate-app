@@ -12,7 +12,7 @@ export const GlobalProvider=({children})=>{
       const response = await fetch(propertyUrl);
       const result = await response.json();
       setProperties(result);
-      console.log("Fetched result:", result);
+      
     } catch (error) {
       console.error("Error fetching data:", error);
     }

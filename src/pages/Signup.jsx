@@ -1,74 +1,144 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-// import Frame7 from "../assets/Frame 7.png";
-import Image from '../assets/Image1.png';
-function Signup({isLogin,setIsLogin}) {
-  return (
-    <div className="m-3  ">
-      {/* <div className='flex justify-between gap-12 shadow-lg '>
-        <Link to="/">
-        <button className='rounded-full border w-[242px] h-[47px] p-2 cursor-pointer'><span className="text-2xl  border border-black  rounded-full "> &#8592;</span>{" "} Back to HomePage</button>
-        </Link>
-        <img
-        src={Frame7}
-        alt="logo"
-        className="w-44 h-10 m-2 p-1 top-9 left-13 gap-8"
-      />
-      <button className='bg-[#1E3A8A] text-white w-[150px] h-[47px] cursor-pointer rounded-full p-2'>About Us <span className="text-2xl  border border-white rounded-full ">&#8594;</span>{" "}</button>
-        </div> */}
+import passwordicon from "../assets/passwordicon.png";
+import emailIcon from "../assets/emailIcon.jpg";
+import Image from "../assets/Image1.png";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../services/firebaseConfig";
+import { toast } from "react-hot-toast";
 
-      {/**Signup form -Create new account */}
-      <div className="flex  ">
-        <div className="mt-5 p-2 flex flex-col">
-          <h3 className="font-bold text-[34px] w-[353px] h-[51px] text-center  ml-20 ">
+function Signup({ showLogin, setShowLogin }) {
+
+  const[name,setName]=useState("");
+  const[email,setEmail]=useState("");
+  const[passwordInput,setPasswordInput]=useState("");
+  const[confirmPassword,setConfirmPassword]=useState("");
+
+
+  // 👁️ state for toggles
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+
+const handleSignup=async(e)=>{
+e.preventDefault();
+if(passwordInput!=confirmPassword){
+  toast.error("Password do not match");
+  return;
+}
+try{
+  await createUserWithEmailAndPassword(auth,email,passwordInput);
+  toast.success("Account created successfully 🎉");
+  setShowLogin(true);
+
+}
+catch(err){
+  toast.error(err.message)
+} 
+}
+
+  return (
+    <div className="px-4 py-8 sm:px-6 md:px-10 lg:px-20">
+      <div className="flex flex-col lg:flex-row items-center gap-10">
+        {/* Form Section */}
+        <div className="w-full max-w-md lg:max-w-lg">
+          <h3 className="font-bold text-2xl sm:text-3xl text-center mb-6">
             Create new account
           </h3>
-          <label className="ml-3 text-[18px] font-medium w-[55px]">Name</label>
+
+          {/* Name */}
+          <form onSubmit={handleSignup}>
+          <label className="text-sm sm:text-base font-medium">Name</label>
           <input
-            type="name"
+            type="text"
             required
-            className=" rounded-2xl border border-black w-[453px] text-[#7A7A7A] h-[59px] m-2 p-2 text-xl "
+            value={name}
+            onChange={(e)=>setName(e.target.value)}
+            className="w-full h-12 sm:h-14 rounded-2xl border border-gray-400 pl-4 pr-12 text-gray-700 text-base sm:text-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter Your Full Name"
           />
 
-          <label className="ml-3 text-[18px] font-medium w-[55px]">Email</label>
-          <input
-            type="email"
-            required
-            className=" rounded-2xl border border-black w-[453px] h-[59px] text-[#7A7A7A] m-2 p-2 text-xl "
-            placeholder="Enter Your Email Id"
-          />
+          {/* Email */}
+          <label className="text-sm sm:text-base font-medium">Email</label>
+          <div className="relative mb-4">
+            <input
+              type="email"
+              required
+              value={email}
+            onChange={(e)=>setEmail(e.target.value)}
+              className="w-full h-12 sm:h-14 rounded-2xl border border-gray-400 pl-4 pr-12 text-gray-700 text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter Your Email Id"
+            />
+            <img
+              src={emailIcon}
+              alt="icon"
+              className="absolute top-1/2 right-4 -translate-y-1/2 w-5 h-5"
+            />
+          </div>
 
-          <label className="ml-3 text-[18px] font-medium w-[55px]">
-            Password
-          </label>
-          <input
-            type="password"
-            required
-            className=" rounded-2xl border border-black w-[453px] h-[59px] text-[#7A7A7A] m-2 p-2 text-xl "
-            placeholder="Enter Your Password"
-          />
+          {/* Password */}
+          <label className="text-sm sm:text-base font-medium">Password</label>
+          <div className="relative mb-4">
+            <input
+              type={showPassword?"text":"password"}
+              required
+              value={passwordInput}
+            onChange={(e)=>setPasswordInput(e.target.value)}
+              className="w-full h-12 sm:h-14 rounded-2xl border border-gray-400 pl-4 pr-12 text-gray-700 text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter Your Password"
+            />
+            <img
+              src={passwordicon}
+              alt="icon"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute top-1/2 right-4 -translate-y-1/2 w-5 h-5 cursor-pointer"
+            />
+          </div>
 
-          <label className="ml-3 text-[18px] font-medium w-[55px]">
-            Confirm Password
-          </label>
-          <input
-            type="password"
-            required
-            className=" rounded-2xl border border-black w-[453px] h-[59px]  text-[#7A7A7A] m-2 p-2 text-xl "
-            placeholder="Confirm Your Password"
-          />
+          {/* Confirm Password */}
+          <label className="text-sm sm:text-base font-medium">Confirm Password</label>
+          <div className="relative mb-6">
+            <input
+              type={showConfirm?"text":"password"}
+              required
+              value={confirmPassword}
+            onChange={(e)=>setConfirmPassword(e.target.value)}
+              className="w-full h-12 sm:h-14 rounded-2xl border border-gray-400 pl-4 pr-12 text-gray-700 text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Confirm Your Password"
+            />
+            <img
+              src={passwordicon}
+              alt="icon"
+              onClick={() => setShowConfirm(!showConfirm)}
+              className="absolute top-1/2 right-4 -translate-y-1/2 w-5 h-5 cursor-pointer"
+            />
+          </div>
 
-          <button className="bg-[#1E3A8A] text-white  w-[417px] ml-6 font-medium text-[24px] h-[62px] mt-5 p-2 rounded-full">
+          {/* Button */}
+          <button  type="submit" className="w-full bg-[#1E3A8A] text-white font-medium text-lg sm:text-xl h-12 sm:h-14 rounded-full hover:bg-[#162c6d] transition">
             Create Account
           </button>
-          <p className="ml-18 w-[264px] h-[11px] mt-5 p-2 text-[#454343] text-[16px]">
+          </form>
+          {/* Switch to Login */}
+          <p className="text-center mt-5 text-gray-600 text-sm sm:text-base">
             Already have an account?{" "}
-            <span className="text-[#1E3A8A] cursor-pointer" onClick={()=>setIsLogin(!isLogin)}>Log In</span>
+            <span
+              className="text-[#1E3A8A] cursor-pointer font-medium"
+              onClick={() => setShowLogin(!showLogin)}
+            >
+              Log In
+            </span>
           </p>
         </div>
-        <div>
-         {isLogin && <img src={Image} alt="image" className="w-[945px] h-[738px] mt-4 rounded-3xl"/> }
+
+        {/* Right Image */}
+        <div className="hidden lg:block lg:flex-1">
+          {showLogin && (
+            <img
+              src={Image}
+              alt="signup"
+              className="w-full h-auto rounded-3xl object-cover"
+            />
+          )}
         </div>
       </div>
     </div>
