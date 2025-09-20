@@ -3,10 +3,10 @@ import Navbar from '../components/Navbar'
 import HeroBanner from '../components/HeroBanner'
 
 import FeaturedProject from '../components/FeaturedProject'
-import PropertySale from '../components/PropertySale'
-import Rentals from '../components/Rentals'
+
 import Footer from '../components/Footer'
 import HeroSection from '../components/HeroSection'
+import Aboutus from '../components/Aboutus'
 
 function Home() {
   return (
@@ -15,8 +15,7 @@ function Home() {
         <HeroBanner/>
         <HeroSection/>
         <FeaturedProject/>
-        <PropertySale />
-        <Rentals/>
+         <Aboutus/>
         <Footer/>
     </div>
   )

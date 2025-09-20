@@ -61,7 +61,7 @@ function Login() {
         <div className="w-full max-w-md lg:max-w-lg">
           {showLogin ? (
             <div className="flex flex-col gap-4">
-              <h3 className="font-bold text-2xl sm:text-3xl text-center">
+              <h3 className="font-bold text-2xl sm:text-3xl text-center cursor-pointer">
                 Log In
               </h3>
 

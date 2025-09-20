@@ -1,10 +1,41 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import HomeImg from "../assets/homeImg.jpg";
 import rent from "../assets/rent.png";
 import home from "../assets/home.png";
 import location from "../assets/location.png";
+import { useNavigate } from "react-router-dom";
+import { GlobalContext } from "../context/context";
 
 function HeroBanner() {
+  const navigate = useNavigate();
+
+  //states for user selection
+
+    const[rentType,setRentType]=useState("");
+    const[houseType,setHouseType]=useState("");
+    const[country,setCountry]=useState("");
+
+  const { properties } = useContext(GlobalContext);
+
+  const countryName = properties
+    ?.filter((item) => item?.country)
+    .map((item) => item?.country);
+
+    const filterType = properties?.filter((item) =>
+    ['villa', 'house', 'apartment', 'studio'].includes(item.type)
+  );
+  
+  
+  const handleFindProperty=()=>{
+    navigate("/listing",{
+      state:{
+        rentType,
+        houseType,
+        country
+      }
+    });
+    
+  }
   return (
     <div className="relative w-full max-w-[1440px] mx-auto text-center rounded-[30px]">
       {/* Background Image */}
@@ -86,37 +117,48 @@ function HeroBanner() {
             {/* For Rent Dropdown */}
             <div className="flex items-center gap-2 border h-12 border-gray-300 text-gray-700 text-base rounded-lg px-4 md:w-48">
               <img src={rent} alt="rent" className="w-5 h-5" />
-              <select className="outline-none cursor-pointer w-full">
-                <option>For Rent</option>
-                <option>For Sale</option>
+              <select value={rentType} onChange={(e)=>setRentType(e.target.value)}className="outline-none cursor-pointer w-full">
+                <option value="rent">For Rent</option>
+                <option value="sale">For Sale</option>
               </select>
             </div>
 
             {/* House Type Dropdown */}
             <div className="flex items-center gap-2 border h-12 border-gray-300 text-gray-700 text-base rounded-lg px-4 md:w-48">
               <img src={home} alt="home" className="w-5 h-5" />
-              <select className="outline-none cursor-pointer w-full">
-                <option>House</option>
-                <option>Apartment</option>
-                <option>Villa</option>
-                <option>Studio</option>
+              <select value={houseType} onChange={(e)=>setHouseType(e.target.value)} className="outline-none cursor-pointer w-full">
+               <option value="">All</option>
+                <option value="house">House</option>
+                <option value="apartment">Apartment</option>
+                <option value="villa">Villa</option>
+                <option value="studio">Studio</option>
               </select>
             </div>
 
             {/* Location Dropdown */}
-            <div className="flex items-center gap-2 border h-12 border-gray-300 text-gray-700 text-base rounded-lg px-4 md:w-48">
+            <div className="flex items-center gap-2 border h-12 border-gray-300 text-gray-700 text-base rounded-lg px-4 md:w-48 ">
               <img src={location} alt="location" className="w-5 h-5" />
-              <select className="outline-none cursor-pointer w-full">
-                <option>Indonesia</option>
-                <option>India</option>
-                <option>USA</option>
-                <option>Canada</option>
-              </select>
+              <select value={country} onChange={(e)=>setCountry(e.target.value)} className="outline-none cursor-pointer w-40 md:w-48 bg-white text-gray-700 ">
+            
+            <option value="">All Countries</option>
+                {countryName?.map((country,index)=>{
+                  return(
+                    <>
+                    <option key={index} value={country}>{country}</option>
+                   
+                    </>
+                  )
+           
+                })}
+                </select>
             </div>
 
             {/* Find Property Button */}
             <div className="w-full md:flex-1">
-              <button className="bg-[#1E3A8A] w-full text-lg sm:text-xl text-white h-12 rounded-full hover:bg-[#162c6d] transition">
+              <button
+                onClick={()=> handleFindProperty()}
+                className="bg-[#1E3A8A] w-full text-lg sm:text-xl text-white h-12 rounded-full hover:bg-[#162c6d] cursor-pointer transition"
+              >
                 Find Property
               </button>
             </div>

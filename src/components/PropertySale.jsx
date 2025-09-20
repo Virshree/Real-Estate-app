@@ -40,11 +40,12 @@ const visibileProperties=showAll?filteredSale:filteredSale?.slice(0,4);
           <PropertyCard
             key={item.id}
             propertyImage={item?.propertyImage}
-            city={item?.city}
+            countryCode={item?.countryCode}
             country={item?.country}
             description={item?.description}
             rating={item?.rating}
             price={item?.price}
+            type={item?.type}
           />
         ))}
       </div>

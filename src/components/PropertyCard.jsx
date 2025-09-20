@@ -5,11 +5,12 @@ import locations from "../assets/locationIcon.png";
 
 function PropertyCard({
   propertyImage,
-  city,
+  countryCode,
   country,
   description,
   rating,
   price,
+  type
 })
  
 {
@@ -33,13 +34,13 @@ function PropertyCard({
         <div className="flex flex-row gap-4">
             <img src={locations} alt="locationicon" className="w-[20px] h-[26.5px]" />
             <p className="text-[#979797]">
-              {city},{country}
+            {countryCode},{country}
             </p>
         </div>
         <p className="text-[#979797]"> ⭐ {rating}/5</p>
       </div>
        {/* Description with Show More / Less */}
-       <p className="text-[#1E1E1E] w-[270px]">
+       <p className="text-[#1E1E1E] w-[270px] text-[15px]">
         {showMore ? description : showDescription}
         {description.length > 80 && (
           <button
@@ -50,6 +51,7 @@ function PropertyCard({
           </button>
         )}
       </p>
+      <p className="text-[#1E1E1E] w-[270px] text-[16px] leading-11">Type:{type}</p>
       <div className="flex flex-row gap-15 mt-2 p-2">
         <button className="bg-[#1E3A8A] text-white w-[128px] h-[38.7px] rounded-full">
           Buy Now
