@@ -13,7 +13,7 @@ function FeaturedProject() {
         <h3 className="text-[#1E3A8A] text-2xl md:text-4xl font-bold">
           Featured Projects
         </h3>
-        <button className="border-2 border-[#1E3A8A] rounded-full px-6 py-2 text-sm md:text-base hover:bg-[#1E3A8A] hover:text-white transition">
+        <button className="border-2 border-[#1E3A8A]  cursor-pointer rounded-full px-6 py-2 text-sm md:text-base hover:bg-[#1E3A8A] hover:text-white transition">
           See 268 New Projects
         </button>
       </div>
@@ -21,12 +21,17 @@ function FeaturedProject() {
       {/* Image Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Big image - takes 2 columns on larger screens */}
-        <div className="lg:col-span-2">
+        <div className="lg:col-span-2 relative">
           <img
             src={filteredProperty[0]?.propertyImage}
             alt="propertyImage"
-            className="w-full h-[250px] md:h-[350px] lg:h-[470px] object-cover rounded-xl"
+            className=" absolute w-full h-[250px] md:h-[350px] lg:h-[470px] object-cover rounded-xl"
           />
+          <div>
+          <h2 className="text-[#FFFFFF] absolute  text-md w-[178px] h-[27px] top-[410px] left-[25px]">By Finder & Projects</h2>
+        <p className="absolute font-semibold text-white top-[425px] w-[254px] ml-6 text-xl h-[38px]left-[25px] m-2">Kenanga Residence</p>
+          </div>
+          
         </div>
 
         {/* Tall image */}

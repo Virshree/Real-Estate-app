@@ -114,7 +114,7 @@ catch(err){
           </div>
 
           {/* Button */}
-          <button  type="submit" className="w-full bg-[#1E3A8A] text-white font-medium text-lg sm:text-xl h-12 sm:h-14 rounded-full hover:bg-[#162c6d] transition">
+          <button  type="submit" className="w-full bg-[#1E3A8A] text-white font-medium text-lg sm:text-xl h-12 sm:h-14 cursor-pointer rounded-full hover:bg-[#162c6d] transition">
             Create Account
           </button>
           </form>
