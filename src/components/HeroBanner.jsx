@@ -33,13 +33,13 @@ function HeroBanner() {
       />
 
       {/* Overlay Content */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center px-4 pb-6 sm:px-6 md:px-8">
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-4 sm:px-6 md:px-10 ">
         {/* Title */}
-        <div className="w-full max-w-lg mx-auto">
-          <h1 className="font-bold font-[Poppins] text-[24px] sm:text-[24px] md:text-[36px] text-white leading-snug">
+        <div className="w-full max-w-lg ">
+          <h1 className="font-bold font-[Poppins] hidden lg:block text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white leading-snug">
             Find Your Dream Home in One Click!
           </h1>
-          <p className="text-[#EEEEEE] mt-2 text-sm sm:text-base">
+          <p className="text-[#EEEEEE] mt-2 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
             Discover, Buy, or Rent Verified Properties with Ease.
           </p>
         </div>
@@ -70,8 +70,8 @@ function HeroBanner() {
         </button>
 
         {/* Dropdown Section */}
-        <div className="relative bg-white top-33 shadow-lg p-4 mx-auto 
-         rounded-xl z-20">
+        <div className="relative bg-white top-30 shadow-lg p-4 mx-auto 
+         rounded-xl z-20 w-full max-w-[1100px]">
           <div className="flex flex-col gap-4 md:flex-row md:flex-wrap md:justify-between  ">
             {/* Rent Type */}
             <div className="flex items-center gap-2 border h-12 border-gray-300 text-gray-700 rounded-lg px-4 w-full md:w-[48%] lg:w-[23%]">

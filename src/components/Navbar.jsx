@@ -81,8 +81,8 @@ function Navbar() {
           <span className="cursor-pointer hover:text-blue-500">Buy</span>
           <span className="cursor-pointer hover:text-blue-500">Rent</span>
           <span className="cursor-pointer hover:text-blue-500">Sell</span>
-          <span className="cursor-pointer hover:text-blue-500">About Us</span>
-          <span className="cursor-pointer hover:text-blue-500">Contact Us</span>
+          <a href="#aboutus" className="cursor-pointer hover:text-blue-500">About Us</a>
+          <a href="#contactus" className="cursor-pointer hover:text-blue-500">Contact Us</a>
           <Link to="/login">
             <button className="bg-[#1E3A8A] text-white rounded-full px-6 py-2 text-[16px] flex items-center gap-2 hover:bg-blue-900 transition">
               Login/Register
