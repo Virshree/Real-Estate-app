@@ -17,7 +17,7 @@ function Navbar() {
 
   }
   return (
-    <nav className="flex items-center justify-between px-4 py-3 ">
+    <nav className="flex relative items-center justify-between px-4 py-3 ">
       {/* Logo */}
       <img src={Frame7} alt="logo" className="w-[176px] h-[40.8px]" />
 
@@ -68,15 +68,15 @@ function Navbar() {
 
       {/* Mobile Menu Button */}
       <button
-        className="md:hidden text-3xl"
-        onClick={() => setIsOpen(!isOpen)}
+        className="lg:hidden text-3xl cursor-pointer z-[9999]"
+        onClick={() => {setIsOpen(!isOpen)}}
       >
         ☰
       </button>
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="absolute top-16 left-0 w-full bg-white shadow-md flex flex-col items-center space-y-4 py-4 z-50">
+        <div className="absolute top-16 left-0 w-full bg-white shadow-md flex flex-col items-center space-y-4 py-4 z-[9999]">
           <span className="cursor-pointer hover:text-blue-500">Home</span>
           <span className="cursor-pointer hover:text-blue-500">Buy</span>
           <span className="cursor-pointer hover:text-blue-500">Rent</span>

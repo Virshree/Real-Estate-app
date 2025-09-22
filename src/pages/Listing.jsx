@@ -51,7 +51,7 @@
               {showAll?"Show Less Properties":"View More Properties"}
             </button>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 mx-auto  lg:grid-cols-3 xl:grid-cols-4 gap-6 m-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 mx-auto  lg:grid-cols-3 xl:grid-cols-4 gap-6 m-4 md:ml-10">
             {visibileProperties?.length > 0 ? (
               visibileProperties.map((item) => (
                 <PropertyCard
