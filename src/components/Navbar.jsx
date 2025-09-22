@@ -68,7 +68,7 @@ function Navbar() {
 
       {/* Mobile Menu Button */}
       <button
-        className="lg:hidden text-3xl cursor-pointer z-[9999]"
+        className="lg:hidden text-3xl cursor-pointer"
         onClick={() => {setIsOpen(!isOpen)}}
       >
         ☰

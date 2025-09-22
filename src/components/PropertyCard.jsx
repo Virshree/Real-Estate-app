@@ -22,7 +22,7 @@ function PropertyCard({
 
   
     <div
-      className="bg-[#F1F1F1] text-black md:mx-auto  w-[340px] m-2 p-2  relative rounded-xl hover:border border-blue-400 shadow-lg cursor-pointer"
+      className="bg-[#F1F1F1] text-black   w-[340px] m-2 p-2  relative rounded-xl hover:border border-blue-400 shadow-lg cursor-pointer"
     
     >
       <p className="  text-[20px] leading-11 text-white p-2 absolute top-0 right-0 bg-[#111131] rounded-full">{type}</p>
